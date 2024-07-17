@@ -8,6 +8,11 @@ import ChargeNow from "../../../public/chargenow.png";
 import Car from "../../../public/car.png";
 import Route from "../../../public/route.png";
 import Avatar from "../../../public/avatar.png";
+import {
+  
+  useJsApiLoader,
+  
+} from "@react-google-maps/api";
 
 import { startLocationState, planTravelState, chargeNowState } from "../../recoil/recoilState";
 import { useRecoilState } from "recoil";
@@ -24,7 +29,7 @@ const Navbar = () => {
   
   const searchBoxRef = useRef(null);
   const { isLoaded, loadError } = useJsApiLoader({
-    googleMapsApiKey: "AIzaSyDbGK5TR4V-NupTcuGeERAj8AGjnVs-gs0",
+    googleMapsApiKey: process.env.NEXT_PUBLIC_GOOGLE_MAPS_API_KEY,
     libraries,
   });
   const togglePlanTravel = () => {
@@ -87,26 +92,47 @@ const Navbar = () => {
   
   return (
     <div className="flex flex-row justify-between items-center relative z-10">
+      {/* Left Logo */}
       <div className="flex-shrink-0 pl-4 pt-4">
         <Button size="logo">
           <Image src={Logo} alt="logo" className="h-12 w-12" />
         </Button>
       </div>
-      <div className="flex justify-between items-center relative ">
+      
+      {/* Center Navigation Buttons */}
+      <div className="relative flex justify-center items-center">
         <div className="absolute left-1/2 transform -translate-x-1/2 flex space-x-4">
-          <Button asChild size="plantravel" onClick={()=>{toggleChargeNow(); setplanTravelState(false)}}>
+          <Button
+            asChild
+            size="plantravel"
+            onClick={() => {
+              toggleChargeNow();
+              setplanTravelState(false);
+            }}
+          >
             <div className="flex justify-end items-center">
               <div className="mr-1">Charge Now</div>
               <div>
-                <Image src={ChargeNow} alt="logo" className="h-6 w-6" />
+                <Image
+                  src={ChargeNow}
+                  alt="charge now icon"
+                  className="h-6 w-6"
+                />
               </div>
             </div>
           </Button>
-          <Button asChild size="plantravel" onClick={()=>{togglePlanTravel(); setChargeNow(false)}}>
+          <Button
+            asChild
+            size="plantravel"
+            onClick={() => {
+              togglePlanTravel();
+              setChargeNow(false);
+            }}
+          >
             <div className="flex justify-end items-center">
               <div className="mr-2">Plan Travel</div>
               <div>
-                <Image src={Route} alt="logo" className="h-6 w-6" />
+                <Image src={Route} alt="plan travel icon" className="h-6 w-6" />
               </div>
             </div>
           </Button>
@@ -114,15 +140,16 @@ const Navbar = () => {
             <div className="flex justify-end items-center">
               <div className="text">Your Vehicle</div>
               <div>
-                <Image src={Car} alt="logo" className="h-6 w-6" />
+                <Image src={Car} alt="car icon" className="h-6 w-6" />
               </div>
             </div>
           </Button>
         </div>
       </div>
+      {/* Right Avatar */}
       <div className="flex-shrink-0 pt-4 pr-4">
         <Button className="mr-1" size="logo">
-          <Image src={Avatar} alt="logo" className="h-12 w-12" />
+          <Image src={Avatar} alt="avatar icon" className="h-12 w-12" />
         </Button>
       </div>
     </div>
