@@ -8,29 +8,7 @@ import ChargeNow from "../../../public/chargenow.png";
 import Car from "../../../public/car.png";
 import Route from "../../../public/route.png";
 import Avatar from "../../../public/avatar.png";
-import { Input } from "@/components/ui/input";
-import {
-  StandaloneSearchBox,
-  GoogleMap,
-  useLoadScript,
-  MarkerF,
-  useJsApiLoader,
-  MarkerClusterer,
-  Circle,
-  DirectionsRenderer,
-  DistanceMatrixService,
-  Places,
-  InfoWindow,
-} from "@react-google-maps/api";
-import {
-  Dialog,
-  DialogContent,
-  DialogDescription,
-  DialogHeader,
-  DialogTitle,
-  DialogTrigger,
-} from "@/components/ui/dialog";
-import { Slider } from "@/components/ui/slider";
+
 import { startLocationState, planTravelState, chargeNowState } from "../../recoil/recoilState";
 import { useRecoilState } from "recoil";
 const Navbar = () => {
