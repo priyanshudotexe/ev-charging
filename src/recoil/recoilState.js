@@ -1,0 +1,39 @@
+import { atom } from "recoil";
+
+export const startLocationState = atom({
+  key: "startLocationState",
+  default: {},
+});
+
+export const endLocationState = atom({
+  key: "endLocationState",
+  default: { lat: 0, lng: 0 },
+});
+
+export const locationListState = atom({
+  key: "locationListState",
+  default: [],
+});
+
+export const radiusState = atom({
+  key: "radiusState",
+  default: 100,
+});
+
+export const directionState = atom({
+  key: "directionState",
+  default: null
+});
+
+export const planTravelState= atom({
+  key: "planTravelState",
+  default: false
+});
+export const chargeNowState = atom({
+  key: "chargeNowState",
+  default: false
+});
+export const navStates = atom({
+  key: "navStates",
+  default: 1,
+});

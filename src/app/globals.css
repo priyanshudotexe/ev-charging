@@ -1,0 +1,146 @@
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+@layer base {
+  :root {
+    --background: 0 0% 100%;
+    --foreground: 240 10% 3.9%;
+    --card: 0 0% 100%;
+    --card-foreground: 240 10% 3.9%;
+    --popover: 0 0% 100%;
+    --popover-foreground: 240 10% 3.9%;
+    --primary: 142.1 76.2% 36.3%;
+    --primary-foreground: 355.7 100% 97.3%;
+    --secondary: 240 4.8% 95.9%;
+    --secondary-foreground: 240 5.9% 10%;
+    --muted: 240 4.8% 95.9%;
+    --muted-foreground: 240 3.8% 46.1%;
+    --accent: 240 4.8% 95.9%;
+    --accent-foreground: 240 5.9% 10%;
+    --destructive: 0 84.2% 60.2%;
+    --destructive-foreground: 0 0% 98%;
+    --border: 240 5.9% 90%;
+    --input: 240 5.9% 90%;
+    --ring: 142.1 76.2% 36.3%;
+    --radius: 1rem;
+  }
+
+  .dark {
+    --background: 20 14.3% 4.1%;
+    --foreground: 0 0% 95%;
+    --card: 24 9.8% 10%;
+    --card-foreground: 0 0% 95%;
+    --popover: 0 0% 9%;
+    --popover-foreground: 0 0% 95%;
+    --primary: 142.1 70.6% 45.3%;
+    --primary-foreground: 144.9 80.4% 10%;
+    --secondary: 240 3.7% 15.9%;
+    --secondary-foreground: 0 0% 98%;
+    --muted: 0 0% 15%;
+    --muted-foreground: 240 5% 64.9%;
+    --accent: 12 6.5% 15.1%;
+    --accent-foreground: 0 0% 98%;
+    --destructive: 0 62.8% 30.6%;
+    --destructive-foreground: 0 85.7% 97.3%;
+    --border: 240 3.7% 15.9%;
+    --input: 240 3.7% 15.9%;
+    --ring: 142.4 71.8% 29.2%;
+  }
+}
+
+
+:root {
+  --foreground-rgb: 0, 0, 0;
+  --background-start-rgb: 214, 219, 220;
+  --background-end-rgb: 255, 255, 255;
+}
+
+@media (prefers-color-scheme: dark) {
+  :root {
+    --foreground-rgb: 255, 255, 255;
+    --background-start-rgb: 0, 0, 0;
+    --background-end-rgb: 0, 0, 0;
+  }
+}
+
+body {
+  color: rgb(var(--foreground-rgb));
+  background: linear-gradient(
+      to bottom,
+      transparent,
+      rgb(var(--background-end-rgb))
+    )
+    rgb(var(--background-start-rgb));
+}
+
+@layer utilities {
+  .text-balance {
+    text-wrap: balance;
+  }
+}
+
+.main-container{
+  width: 100vw;
+  height: 100vh;
+  padding: 0px;
+  margin:-8px;
+  overflow:hidden;
+  box-sizing: border-box;
+  align-items: center;
+  position:relative;
+  display:flex;
+  border: none;
+}
+
+.map-container{
+  width: 100vw;
+  height: 100vh;
+  overflow: hidden;
+  padding:0px;
+  margin:0px;
+  overflow:auto;
+  border: none;
+}
+
+.gm-style iframe+div {
+  border: none !important;
+}
+.places-dropdown {
+  z-index: 1000; /* Ensure this is sufficiently high */
+  pointer-events: auto; /* Ensure dropdown can register pointer events */
+  position: absolute; /* Ensure dropdown is positioned relative to its nearest positioned ancestor */
+  top: 100%; /* Adjust based on layout */
+  left: 0; /* Adjust based on layout */
+}
+
+.pac-container {
+  background-color: #000000; /* Dark background color */
+  border: 1px solid #444; /* Dark border color */
+  font-size: 16px;
+  color: #ffffff; /* White text color */
+  z-index: 1000; /* Ensure it's above other content */
+  box-shadow: 0 2px 4px rgba(0, 0, 0, 0.5); /* Add some shadow for better visibility */
+}
+
+.pac-item {
+  color: #ffffff; /* White text color */
+  background-color: #000000; /* Dark background color */
+}
+
+.pac-item:hover {
+  background-color: #3b3b3b; /* Slightly lighter background color on hover */
+}
+
+.pac-item-query {
+  color: #fbfbfb; /* Highlight the query part in a different color */
+}
+
+.pac-icon {
+  filter: invert(1); /* Invert colors for better visibility on dark background */
+}
+
+.pac-matched {
+  font-weight: bold; /* Bold matched text for emphasis */
+}
+
