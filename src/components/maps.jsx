@@ -18,6 +18,7 @@ import {
   radiusState,
   directionState,
   navStates,
+  etaState,
 } from "../recoil/recoilState.js";
 
 const libraries = ["places"];
@@ -230,10 +231,12 @@ const Map = ({}) => {
   const searchBoxRef = useRef(null);
   //visible markers are set to all the locations
 
+
   //reference to the map
   const [navState, setNavState] = useRecoilState(navStates);
   const [locations, setLocationList] = useRecoilState(locationListState);
   const [visibleMarkers, setVisibleMarkers] = useState(locations);
+  const [eta, setEta] = useRecoilState(etaState);
   const mapRef = useRef();
   //wrapper function for the setter of startLocation
   function updatestartLocation(newLat, newLng) {
@@ -299,6 +302,9 @@ const Map = ({}) => {
         (result, status) => {
           if (status === google.maps.DirectionsStatus.OK && result) {
             setDirections(result);
+            console.log(result?.routes[0]?.legs[0]?.distance?.text ?? "");
+            console.log(result?.routes[0]?.legs[0]?.duration?.text ?? "");
+            setEta({  eta: result?.routes[0]?.legs[0]?.duration?.text ?? "", distance: result?.routes[0]?.legs[0]?.distance?.text ?? "" });
             for (
               var i = 0;
               i < result?.routes[0]?.legs[0]?.steps?.length;
@@ -483,6 +489,10 @@ const Map = ({}) => {
       (result, status) => {
         if (status === google.maps.DirectionsStatus.OK && result) {
           setDirections(result);
+          setEta({
+            eta: result?.routes[0]?.legs[0]?.duration?.text ?? "",
+            distance: result?.routes[0]?.legs[0]?.distance?.text ?? "",
+          });
         } else {
           console.error(`error fetching directions ${result}`);
         }
@@ -492,7 +502,7 @@ const Map = ({}) => {
 
   return (
     <div className="main-container overflow-hidden relative">
-      {directions && <Distance leg={directions.routes[0].legs[0]} />}
+      {/* {directions && <Distance leg={directions.routes[0].legs[0]} />} */}
 
       <GoogleMap
         mapContainerClassName="map-container"

@@ -1,10 +1,11 @@
 import React from "react";
-import { planTravelState,chargeNowState } from "@/recoil/recoilState";
+import { planTravelState,chargeNowState,etaState } from "@/recoil/recoilState";
 import { useRecoilState } from "recoil";
 export default function EtaCard() {
 
   const [ptState, setPtState] = useRecoilState(planTravelState);
   const [cnState, setCnState] = useRecoilState(chargeNowState);
+  const [eta, setEta] = useRecoilState(etaState);
   return (
     <dialog
       id="chargeNowDialog"
@@ -15,11 +16,11 @@ export default function EtaCard() {
       <div className="grid gap-4 py-4">
         <div className="grid grid-cols-2 items-center gap-2">
           <div className="text-muted-foreground">ETA</div>
-          <div className="text-2xl font-medium">4:15 PM</div>
+          <div className="text-2xl font-medium">{eta.eta}</div>
         </div>
         <div className="grid grid-cols-2 items-center gap-2">
           <div className="text-muted-foreground">Distance</div>
-          <div className="text-2xl font-medium">245 mi</div>
+          <div className="text-2xl font-medium">{eta.distance}</div>
         </div>
         <div className="grid gap-1">
           <div className="text-muted-foreground">Destination</div>

@@ -14,7 +14,7 @@ import {
   
 } from "@react-google-maps/api";
 
-import { startLocationState, planTravelState, chargeNowState } from "../../recoil/recoilState";
+import { startLocationState, planTravelState, chargeNowState,navStates } from "../../recoil/recoilState";
 import { useRecoilState } from "recoil";
 const Navbar = () => {
   const libraries = ["places"];
@@ -26,6 +26,7 @@ const Navbar = () => {
   
   const [sliderValue, setSliderValue] = useState([50]);
   const [startLocation, setStartLocation] = useRecoilState(startLocationState);
+  const [navState, setNavState] = useRecoilState(navStates);
   
   const searchBoxRef = useRef(null);
   const { isLoaded, loadError } = useJsApiLoader({
@@ -94,7 +95,7 @@ const Navbar = () => {
     <div className="flex flex-row justify-between items-center relative z-10">
       {/* Left Logo */}
       <div className="flex-shrink-0 pl-4 pt-4">
-        <Button size="logo">
+        <Button size="logo" onClick={()=>{setNavState(1)}}>
           <Image src={Logo} alt="logo" className="h-12 w-12" />
         </Button>
       </div>
