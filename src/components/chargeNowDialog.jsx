@@ -47,14 +47,15 @@ export default function ChargeNowDialog() {
       id="chargeNowDialog"
       open={chargeNow}
       style={{ backgroundColor: "black" }}
-      className="rounded-lg w-80 h-110 p-4 absolute top-0 left-0 ml-4 mt-24 text-white"
+      className="rounded-lg w-80 h-96 p-4 absolute top-0 left-0 ml-4 mt-24 text-white"
     >
-      <div className="p-4">
-        <h1 className="mb-2 ml-2 font-semibold">Charge Now</h1>
+      <div className="p-2">
+        <h1 className="mb-2 ml-2 font-extrabold">Charge Now</h1>
+        
 
         <Search />
-        <div className="flex flex-col items-center my-12">
-          <p>or</p>
+        <div className="flex flex-col items-center my-8">
+          <p className="mt-4">or</p>
           <Button
             className="bg-transparent text- border-2 border-white hover:bg-white hover:text-black mt-4"
             onClick={getCurrentLocation}
@@ -78,8 +79,8 @@ export default function ChargeNowDialog() {
             <p className="">10 km</p>
           </div>
           <p>{sliderValue[0] / 10} km</p>
-        </div>
-        <Button variant="plantravel" className="bg-transparent w-full"
+        </div >
+        <Button variant="plantravel" className="bg-transparent w-full "
         onClick={()=>{TempNav(); setChargeNow(false)}}>
           Charge Now
         </Button>

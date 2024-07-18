@@ -6,6 +6,7 @@ import { useRecoilState } from "recoil";
 import { useEffect, useState } from "react";
 import  ChargeNowDialog from "@/components/chargeNowDialog.jsx";
 import PlanTravelDialog from "@/components/planTravelDialog";
+import EtaCard from "@/components/etacard.jsx";
 
 export default function Home() {
   const [startLocation, setStartLocation] = useRecoilState(startLocationState);
@@ -40,11 +41,15 @@ export default function Home() {
   return (
     <div className="relative">
       <div className="z-0 absolute">
-      <Map/>
+        <Map />
       </div>
       <Navbar />
+
       <ChargeNowDialog />
-      <PlanTravelDialog/>
+      <PlanTravelDialog />
+      <div className="absolute mt-96 ml-4 p-10">
+        <EtaCard />
+      </div>
     </div>
   );
 }
