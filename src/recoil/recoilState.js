@@ -37,3 +37,10 @@ export const navStates = atom({
   key: "navStates",
   default: 1,
 });
+export const etaState = atom({
+  key: "etaState",
+  default: {
+    eta: "",
+    distance: "",
+  },
+});

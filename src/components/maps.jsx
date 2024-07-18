@@ -206,7 +206,7 @@ const exampleMapStyles = [
 //  redirect: "follow",
 // };
 // let locations = [];
-// fetch("http://192.168.0.67:5000/charging_app/map", requestOptions)
+// fetch("http:///charging_app/map", requestOptions)
 // .then((response) => response.json())
 // .then((data) => {
 // data.stations.forEach((station) => {
@@ -267,7 +267,7 @@ const Map = ({}) => {
       };
       setLocationList([]);
       const locationlist = [];
-      fetch("http://192.168.1.21:5000/charging_app/map", requestOptions)
+      fetch("http://3.89.187.23:8000/charging_app/map", requestOptions)
         .then((response) => response.json())
         .then((data) => {
           data.stations.forEach((station) => {
@@ -324,7 +324,7 @@ const Map = ({}) => {
             setLocationList([]);
             const locationlist = [];
             fetch(
-              "http://192.168.1.21:5000/charging_app/map/plantravel/",
+              "http://3.89.187.23:8000/charging_app/map/plantravel/",
               requestOptionsPost
             )
               .then((response) => response.json())
@@ -373,7 +373,7 @@ const Map = ({}) => {
       setDirections(null);
       const locationlist = [];
       fetch(
-        "http://192.168.1.21:5000/charging_app/map/chargenow/",
+        "http://3.89.187.23:8000/charging_app/map/chargenow/",
         requestOptionsPost
       )
         .then((response) => response.json())
@@ -407,8 +407,6 @@ const Map = ({}) => {
 
     return () => {};
   }, [navState]);
-
-
 
   //callback function for when the search box is changed, Retrieves a list of places from a searchBoxRef reference
   function onPlacesChanged() {
