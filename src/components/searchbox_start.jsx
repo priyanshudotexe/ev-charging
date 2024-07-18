@@ -33,7 +33,7 @@ const SearchBoxStart = (props) => {
 
   const searchBoxRef = useRef(null);
   const { isLoaded, loadError } = useJsApiLoader({
-    googleMapsApiKey: "AIzaSyDbGK5TR4V-NupTcuGeERAj8AGjnVs-gs0",
+    googleMapsApiKey: process.env.NEXT_PUBLIC_GOOGLE_MAPS_API_KEY,
     libraries,
   });
   useEffect(() => {
