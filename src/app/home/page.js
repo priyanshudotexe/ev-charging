@@ -47,7 +47,7 @@ export default function Home() {
 
       <ChargeNowDialog />
       <PlanTravelDialog />
-      <div className="absolute mt-96 ml-4 p-10">
+      <div className="absolute mt-96 ml-4 p-14">
         <EtaCard />
       </div>
     </div>

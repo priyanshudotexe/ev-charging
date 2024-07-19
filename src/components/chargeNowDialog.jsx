@@ -81,7 +81,7 @@ export default function ChargeNowDialog() {
           <p>{sliderValue[0] / 10} km</p>
         </div >
         <Button variant="plantravel" className="bg-transparent w-full "
-        onClick={()=>{TempNav(); setChargeNow(false)}}>
+        onClick={()=>{TempNav(); }}>
           Charge Now
         </Button>
       </div>

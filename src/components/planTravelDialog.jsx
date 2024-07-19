@@ -90,7 +90,7 @@ export default function PlanTravelDialog() {
         <Button
           variant="plantravel"
           className="bg-transparent w-full"
-          onClick={()=>{Routing(); setPlanTravel(false);}}          
+          onClick={()=>{Routing();}}          
         >
           Plan Travel
         </Button>
