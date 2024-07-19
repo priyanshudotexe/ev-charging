@@ -274,7 +274,7 @@ const Map = ({}) => {
       };
       setLocationList([]);
       const locationlist = [];
-      fetch("http://3.89.187.23:8000/charging_app/map", requestOptions)
+      fetch("http://192.168.1.21:5000/charging_app/map", requestOptions)
         .then((response) => response.json())
         .then((data) => {
           data.stations.forEach((station) => {
@@ -383,7 +383,7 @@ const Map = ({}) => {
       setDirections(null);
       const locationlist = [];
       fetch(
-        "http://3.89.187.23:8000/charging_app/map/chargenow/",
+        "http://192.168.1.21:5000/charging_app/map/chargenow/",
         requestOptionsPost
       )
         .then((response) => response.json())

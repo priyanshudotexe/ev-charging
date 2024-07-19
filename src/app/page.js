@@ -5,7 +5,6 @@ import { Button } from "@/components/ui/button";
 import { useRecoilState } from "recoil";
 import { navStates } from "../recoil/recoilState.js";
 
-
 export default function Home() {
   const [navState, setNavState] = useRecoilState(navStates);
   function onClickHandle() {
@@ -13,15 +12,12 @@ export default function Home() {
   }
 
   return (
-    <>
-      <div className="z-0 absolute">
-        <Button>
-          <a href="./home" onClick={onClickHandle}>
-            dabaade bhai
-          </a>
-        </Button>
-        
-      </div>
-    </>
+    <div className="z-0 h-screen w-screen flex relative self-center justify-center items-center">
+      <Button className="absolute items-center self-center justify-center">
+        <a href="./home" onClick={onClickHandle}>
+          Home
+        </a>
+      </Button>
+    </div>
   );
 }
