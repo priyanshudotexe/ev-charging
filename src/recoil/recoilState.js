@@ -15,10 +15,14 @@ export const locationListState = atom({
   default: [],
 });
 
-export const radiusState = atom({
+export const chargeNowRadiusState = atom({
   key: "radiusState",
-  default: 100,
+  default: 0,
 });
+export const detourState = atom({
+  key: "detourState",
+  default: 0,
+}); 
 
 export const directionState = atom({
   key: "directionState",

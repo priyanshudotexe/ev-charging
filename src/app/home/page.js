@@ -1,7 +1,7 @@
 "use client";
 import Map from "@/components/maps.jsx";
 import Navbar from "@/components/ui/navbar.jsx";
-import { planTravelState,startLocationState,radiusState,chargeNowState,directionState, navStates, endLocationState } from "../../recoil/recoilState";
+import { planTravelState,startLocationState,chargeNowState,directionState, navStates, endLocationState } from "../../recoil/recoilState";
 import { useRecoilState } from "recoil";
 import { useEffect, useState } from "react";
 import  ChargeNowDialog from "@/components/chargeNowDialog.jsx";
@@ -11,7 +11,7 @@ import EtaCard from "@/components/etacard.jsx";
 export default function Home() {
   const [startLocation, setStartLocation] = useRecoilState(startLocationState);
   const [sliderValue, setSliderValue] = useState([50]);
-  const [radius, setRadius] = useRecoilState(radiusState);
+  
   const [chargeNow, setChargeNow] = useRecoilState(chargeNowState);
   const [navState, setNavState] = useRecoilState(navStates);
     
@@ -47,7 +47,7 @@ export default function Home() {
 
       <ChargeNowDialog />
       <PlanTravelDialog />
-      <div className="absolute mt-96 ml-4 p-14">
+      <div className="absolute mt-96 ml-4 p-20">
         <EtaCard />
       </div>
     </div>

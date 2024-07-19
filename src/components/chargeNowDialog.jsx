@@ -5,6 +5,7 @@ import {
   radiusState,
   chargeNowState,
   navStates,
+  chargeNowRadiusState,
   
 } from "../recoil/recoilState.js";
 import { useRecoilState } from "recoil";
@@ -17,7 +18,7 @@ import { Slider } from "@/components/ui/slider";
 export default function ChargeNowDialog() {
   const [startLocation, setStartLocation] = useRecoilState(startLocationState);
   const [sliderValue, setSliderValue] = useState([50]);
-  const [radius, setRadius] = useRecoilState(radiusState);
+  const [chargeNowRadius,setChargeNowRadius]=useRecoilState(chargeNowRadiusState);
   const [chargeNow, setChargeNow] = useRecoilState(chargeNowState);
   const [navState, setNavState] = useRecoilState(navStates);
   function updateStartLocation(newLat, newLng) {
@@ -49,9 +50,14 @@ export default function ChargeNowDialog() {
       style={{ backgroundColor: "black" }}
       className="rounded-lg w-80 h-96 p-4 absolute top-0 left-0 ml-4 mt-24 text-white"
     >
+      <button
+        onClick={() => setChargeNow(false)}
+        className="absolute top-2 right-2 bg-transparent text-white p-2 hover:bg-gray-700 rounded-full"
+      >
+        x
+      </button>
       <div className="p-2">
         <h1 className="mb-2 ml-2 font-extrabold">Charge Now</h1>
-        
 
         <Search />
         <div className="flex flex-col items-center my-8">
@@ -73,15 +79,22 @@ export default function ChargeNowDialog() {
               value={sliderValue}
               onValueChange={(value) => {
                 setSliderValue(value);
+                setChargeNowRadius(value[0]/10);
+                console.log(chargeNowRadius);
               }}
               step={10}
             />
             <p className="">10 km</p>
           </div>
           <p>{sliderValue[0] / 10} km</p>
-        </div >
-        <Button variant="plantravel" className="bg-transparent w-full "
-        onClick={()=>{TempNav(); }}>
+        </div>
+        <Button
+          variant="plantravel"
+          className="bg-transparent w-full "
+          onClick={() => {
+            TempNav();
+          }}
+        >
           Charge Now
         </Button>
       </div>

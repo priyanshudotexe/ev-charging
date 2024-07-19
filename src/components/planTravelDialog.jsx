@@ -18,9 +18,9 @@ import DestinationSearchBox from "./searchbox.jsx";
 export default function PlanTravelDialog() {
   const [startLocation, setStartLocation] = useRecoilState(startLocationState);
   const [sliderValue, setSliderValue] = useState([50]);
-  const [radius, setRadius] = useRecoilState(radiusState);
   const [planTravel, setPlanTravel] = useRecoilState(planTravelState);
   const [navState, setNavState] = useRecoilState(navStates);
+  const [detour, setDetour] = useState(0);
   function updateStartLocation(newLat, newLng) {
     setStartLocation({ lat: newLat, lng: newLng });
   }
@@ -47,13 +47,18 @@ export default function PlanTravelDialog() {
   };
   
   return (
-    
     <dialog
       id="planTravelDialog"
       open={planTravel}
       style={{ backgroundColor: "black" }}
       className="rounded-lg w-80 h-70  p-6 absolute top-0 left-0 ml-4 mt-24 text-white"
     >
+      <button
+        onClick={() => setPlanTravel(false)}
+        className="absolute top-2 right-2 bg-transparent text-white p-2 hover:bg-gray-700 rounded-full"
+      >
+        x
+      </button>
       <div className="rounded-lg w-100 h-100 flex flex-col items-center">
         <div>
           <h1 className="font-extrabold">Plan Travel</h1>
@@ -81,16 +86,21 @@ export default function PlanTravelDialog() {
               value={sliderValue}
               onValueChange={(value) => {
                 setSliderValue(value);
+                setDetour(value[0] * 1000);
+                console.log(detour);
               }}
               step={10}
             />
             <p className="mt-4 ml-2">10Km</p>
           </div>
+          <p className="ml-28 mt-2">{sliderValue[0] / 10} km</p>
         </div>
         <Button
           variant="plantravel"
           className="bg-transparent w-full"
-          onClick={()=>{Routing();}}          
+          onClick={() => {
+            Routing();
+          }}
         >
           Plan Travel
         </Button>

@@ -15,10 +15,11 @@ import {
   startLocationState,
   endLocationState,
   locationListState,
-  radiusState,
   directionState,
   navStates,
   etaState,
+  detourState,
+  chargeNowRadiusState
 } from "../recoil/recoilState.js";
 
 const libraries = ["places"];
@@ -227,6 +228,9 @@ const Map = ({}) => {
   //const [locationList, setLocationList] = useRecoilState(locationListState);
   const [directions, setDirections] = useRecoilState(directionState);
   const [endLocation, setEndLocation] = useRecoilState(endLocationState);
+  const [detour, setDetour] = useRecoilState(detourState);
+  const [chargeNowRadius, setChargeNowRadius] = useRecoilState(chargeNowRadiusState);
+  
   //useRef is a React hook used to create a ref (reference) that can be attached to a React element or component. This allows you to directly access the DOM element or React component instance.
   const searchBoxRef = useRef(null);
   //visible markers are set to all the locations
@@ -290,8 +294,8 @@ const Map = ({}) => {
           console.error("Error fetching data:", error);
         });
       setNavState(4);
-    } else if (navState == 2) {
-      let path = { coordinates: [] };
+    } else if (navState == 2) {//plan travel
+      let path = { coordinates: [], distance_threshold: {detour} };
       const service = new google.maps.DirectionsService();
       service.route(
         {
@@ -330,7 +334,7 @@ const Map = ({}) => {
             setLocationList([]);
             const locationlist = [];
             fetch(
-              "http://3.89.187.23:8000/charging_app/map/plantravel/",
+              "http://192.168.1.21:5000/charging_app/map/plantravel/",
               requestOptionsPost
             )
               .then((response) => response.json())
@@ -359,12 +363,12 @@ const Map = ({}) => {
         }
       );
       setNavState(4);
-    } else if (navState == 3) {
+    } else if (navState == 3) {//charge now
       setDirections(null);
       let chargenow = {
         latitude: startLocation.lat,
         longitude: startLocation.lng,
-        preferred_distance: 1,
+        preferred_distance: {chargeNowRadius},
       };
 
       const requestOptionsPost = {

@@ -28,7 +28,7 @@ const SearchBoxStart = (props) => {
   const [startLocation, setStartLocation] = useRecoilState(startLocationState);
   const [endLocation, setEndLocation] = useRecoilState(endLocationState);
   const [locationList, setLocationList] = useRecoilState(locationListState);
-  const [radius, setRadius] = useRecoilState(radiusState);
+ 
   const [directions, setDirections] = useRecoilState(directionState);
 
   const searchBoxRef = useRef(null);
