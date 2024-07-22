@@ -19,7 +19,7 @@ import {
   navStates,
   etaState,
   detourState,
-  chargeNowRadiusState
+  chargeNowRadiusState,
 } from "../recoil/recoilState.js";
 
 const libraries = ["places"];
@@ -229,12 +229,12 @@ const Map = ({}) => {
   const [directions, setDirections] = useRecoilState(directionState);
   const [endLocation, setEndLocation] = useRecoilState(endLocationState);
   const [detour, setDetour] = useRecoilState(detourState);
-  const [chargeNowRadius, setChargeNowRadius] = useRecoilState(chargeNowRadiusState);
-  
+  const [chargeNowRadius, setChargeNowRadius] =
+    useRecoilState(chargeNowRadiusState);
+
   //useRef is a React hook used to create a ref (reference) that can be attached to a React element or component. This allows you to directly access the DOM element or React component instance.
   const searchBoxRef = useRef(null);
   //visible markers are set to all the locations
-
 
   //reference to the map
   const [navState, setNavState] = useRecoilState(navStates);
@@ -294,8 +294,9 @@ const Map = ({}) => {
           console.error("Error fetching data:", error);
         });
       setNavState(4);
-    } else if (navState == 2) {//plan travel
-      let path = { coordinates: [], distance_threshold: {detour} };
+    } else if (navState == 2) {
+      //plan travel
+      let path = { coordinates: [], distance_threshold: Number(detour)*1000 };
       const service = new google.maps.DirectionsService();
       service.route(
         {
@@ -308,7 +309,10 @@ const Map = ({}) => {
             setDirections(result);
             console.log(result?.routes[0]?.legs[0]?.distance?.text ?? "");
             console.log(result?.routes[0]?.legs[0]?.duration?.text ?? "");
-            setEta({  eta: result?.routes[0]?.legs[0]?.duration?.text ?? "", distance: result?.routes[0]?.legs[0]?.distance?.text ?? "" });
+            setEta({
+              eta: result?.routes[0]?.legs[0]?.duration?.text ?? "",
+              distance: result?.routes[0]?.legs[0]?.distance?.text ?? "",
+            });
             for (
               var i = 0;
               i < result?.routes[0]?.legs[0]?.steps?.length;
@@ -363,12 +367,14 @@ const Map = ({}) => {
         }
       );
       setNavState(4);
-    } else if (navState == 3) {//charge now
+    } else if (navState == 3) {
+      console.log(Number(chargeNowRadius));
+      //charge now
       setDirections(null);
       let chargenow = {
         latitude: startLocation.lat,
         longitude: startLocation.lng,
-        preferred_distance: {chargeNowRadius},
+        preferred_distance: Number(chargeNowRadius),
       };
 
       const requestOptionsPost = {
@@ -403,7 +409,7 @@ const Map = ({}) => {
           //console.log(locations);
           setVisibleMarkers(locationlist);
           //setNavState(3);
-          //console.log(visibleMarkers);
+          console.log(visibleMarkers);
         })
 
         .catch((error) => {
