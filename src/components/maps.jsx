@@ -232,7 +232,7 @@ const Map = ({}) => {
   const [detour, setDetour] = useRecoilState(detourState);
   const [stationData, setStationData] = useRecoilState(stationDataState);
   const [chargeNowRadius, setChargeNowRadius] = useRecoilState(chargeNowRadiusState);
-  
+
 
   //useRef is a React hook used to create a ref (reference) that can be attached to a React element or component. This allows you to directly access the DOM element or React component instance.
   const searchBoxRef = useRef(null);
@@ -565,8 +565,8 @@ const Map = ({}) => {
         <Marker
           position={startLocation}
           icon={{
-            url: "", // URL to the custom icon image
-            scaledSize: new window.google.maps.Size(30, 50), // Size of the icon
+            url: "https://upload.wikimedia.org/wikipedia/commons/d/db/Blue_Arrow_Up_Darker.png", // URL to the custom icon image
+            scaledSize: new window.google.maps.Size(50, 50), // Size of the icon
             origin: new window.google.maps.Point(0, 0), // Origin of the icon (useful in sprites)
             anchor: new window.google.maps.Point(0, 25), // Anchor point of the icon
           }}
