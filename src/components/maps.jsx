@@ -231,7 +231,8 @@ const Map = ({}) => {
   const [endLocation, setEndLocation] = useRecoilState(endLocationState);
   const [detour, setDetour] = useRecoilState(detourState);
   const [stationData, setStationData] = useRecoilState(stationDataState);
-    useRecoilState(chargeNowRadiusState);
+  const [chargeNowRadius, setChargeNowRadius] = useRecoilState(chargeNowRadiusState);
+  
 
   //useRef is a React hook used to create a ref (reference) that can be attached to a React element or component. This allows you to directly access the DOM element or React component instance.
   const searchBoxRef = useRef(null);
