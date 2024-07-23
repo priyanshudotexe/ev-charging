@@ -20,6 +20,7 @@ import {
   etaState,
   detourState,
   chargeNowRadiusState,
+  stationDataState,
 } from "../recoil/recoilState.js";
 
 const libraries = ["places"];
@@ -229,7 +230,7 @@ const Map = ({}) => {
   const [directions, setDirections] = useRecoilState(directionState);
   const [endLocation, setEndLocation] = useRecoilState(endLocationState);
   const [detour, setDetour] = useRecoilState(detourState);
-  const [chargeNowRadius, setChargeNowRadius] =
+  const [stationData, setStationData] = useRecoilState(stationDataState);
     useRecoilState(chargeNowRadiusState);
 
   //useRef is a React hook used to create a ref (reference) that can be attached to a React element or component. This allows you to directly access the DOM element or React component instance.
@@ -274,7 +275,7 @@ const Map = ({}) => {
       };
       setLocationList([]);
       const locationlist = [];
-      fetch("http://192.168.1.21:5000/charging_app/map", requestOptions)
+      fetch("https://evcharging.live:8000/charging_app/map", requestOptions)
         .then((response) => response.json())
         .then((data) => {
           data.stations.forEach((station) => {
@@ -296,7 +297,7 @@ const Map = ({}) => {
       setNavState(4);
     } else if (navState == 2) {
       //plan travel
-      let path = { coordinates: [], distance_threshold: Number(detour)*1000 };
+      let path = { coordinates: [], distance_threshold: Number(detour) * 1000 };
       const service = new google.maps.DirectionsService();
       service.route(
         {
@@ -338,7 +339,7 @@ const Map = ({}) => {
             setLocationList([]);
             const locationlist = [];
             fetch(
-              "http://192.168.1.21:5000/charging_app/map/plantravel/",
+              "https://evcharging.live:8000/charging_app/map/plantravel/",
               requestOptionsPost
             )
               .then((response) => response.json())
@@ -368,7 +369,7 @@ const Map = ({}) => {
       );
       setNavState(4);
     } else if (navState == 3) {
-      console.log(Number(chargeNowRadius));
+      //console.log(Number(chargeNowRadius));
       //charge now
       setDirections(null);
       let chargenow = {
@@ -389,7 +390,7 @@ const Map = ({}) => {
       setDirections(null);
       const locationlist = [];
       fetch(
-        "http://192.168.1.21:5000/charging_app/map/chargenow/",
+        "https://evcharging.live:8000/charging_app/map/chargenow/",
         requestOptionsPost
       )
         .then((response) => response.json())
@@ -487,6 +488,37 @@ const Map = ({}) => {
   if (!isLoaded) {
     return <div>Loading maps</div>;
   }
+ const stationInfo = () => {
+   const apiEndpoint =
+     "https://evcharging.live:8000/charging_app/map/getspecificstation/"; // Replace with your actual API endpoint
+   const requestData = {
+     longitude: endLocation.lng, // Assuming endLocation has lng property
+     latitude: endLocation.lat, // Assuming endLocation has lat property
+   };
+
+   fetch(apiEndpoint, {
+     method: "POST",
+     headers: {
+       "Content-Type": "application/json",
+     },
+     body: JSON.stringify(requestData),
+   })
+     .then((response) => {
+       if (!response.ok) {
+         throw new Error("Network response was not ok");
+       }
+       return response.json();
+     })
+     .then((data) => {
+       // Use the setStationData hook to update the state with the received data
+       console.log(data);
+       //setStationData(data.data); // Assuming the API response structure is { data: stationData }
+       // You might need to adjust this line depending on the actual structure of the response
+     })
+     .catch((error) => {
+       console.error("There was a problem with your fetch operation:", error);
+     });
+ };
 
   const fetchDirections = (visibleMarkers) => {
     const service = new google.maps.DirectionsService();
@@ -532,7 +564,7 @@ const Map = ({}) => {
         <Marker
           position={startLocation}
           icon={{
-            url: "https://upload.wikimedia.org/wikipedia/commons/a/aa/Google_Maps_icon_%282020%29.svg", // URL to the custom icon image
+            url: "", // URL to the custom icon image
             scaledSize: new window.google.maps.Size(30, 50), // Size of the icon
             origin: new window.google.maps.Point(0, 0), // Origin of the icon (useful in sprites)
             anchor: new window.google.maps.Point(0, 25), // Anchor point of the icon
@@ -548,6 +580,7 @@ const Map = ({}) => {
                 clusterer={clusterer}
                 onClick={() => {
                   fetchDirections(location);
+                  stationInfo();
                 }}
               />
             ))

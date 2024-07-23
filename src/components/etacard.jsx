@@ -1,17 +1,23 @@
 import React from "react";
-import { planTravelState,chargeNowState,etaState } from "@/recoil/recoilState";
+import {
+  planTravelState,
+  chargeNowState,
+  etaState,
+  stationDataState,
+} from "@/recoil/recoilState";
 import { useRecoilState } from "recoil";
 export default function EtaCard() {
 
   const [ptState, setPtState] = useRecoilState(planTravelState);
   const [cnState, setCnState] = useRecoilState(chargeNowState);
   const [eta, setEta] = useRecoilState(etaState);
+  const [stationData, setStationData] = useRecoilState(stationDataState);
   return (
     <dialog
       id="chargeNowDialog"
       open={ptState || cnState }
       style={{ backgroundColor: "black" }}
-      className="rounded-lg w-80 h-60 p-4 absolute  text-white"
+      className="rounded-lg w-80 h-auto p-4 absolute  text-white"
     >
       <div className="grid gap-4 py-4">
         <div className="grid grid-cols-2 items-center gap-2">
@@ -22,13 +28,7 @@ export default function EtaCard() {
           <div className="text-muted-foreground">Distance</div>
           <div className="text-2xl font-medium">{eta.distance}</div>
         </div>
-        <div className="grid gap-1">
-          <div className="text-muted-foreground">Destination</div>
-          <div>
-            San Francisco, CA - The Golden Gate City, known for its iconic
-            bridge, cable cars, and vibrant culture.
-          </div>
-        </div>
+        
       </div>
     </dialog>
   );

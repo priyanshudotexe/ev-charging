@@ -14,7 +14,7 @@ import { Button } from "@/components/ui/button";
 import { useEffect, useState } from "react";
 import { Slider } from "@/components/ui/slider";
 import DestinationSearchBox from "./searchbox.jsx";
-
+import { Cross2Icon } from "@radix-ui/react-icons";
 export default function PlanTravelDialog() {
   const [startLocation, setStartLocation] = useRecoilState(startLocationState);
   const [sliderValue, setSliderValue] = useState([50]);
@@ -51,13 +51,13 @@ export default function PlanTravelDialog() {
       id="planTravelDialog"
       open={planTravel}
       style={{ backgroundColor: "black" }}
-      className="rounded-lg w-80 h-70  p-6 absolute top-0 left-0 ml-4 mt-24 text-white"
+      className="rounded-lg w-80 h-auto p-6 absolute top-0 left-0 ml-4 mt-24 text-white"
     >
       <button
         onClick={() => setPlanTravel(false)}
-        className="absolute top-2 right-2 bg-transparent text-white p-2 hover:bg-gray-700 rounded-full"
+        className="absolute top-2 right-2 bg-transparent text-white p-2 hover:bg-gray-800 rounded-full"
       >
-        x
+        <Cross2Icon />  
       </button>
       <div className="rounded-lg w-100 h-100 flex flex-col items-center">
         <div>

@@ -48,3 +48,7 @@ export const etaState = atom({
     distance: "",
   },
 });
+export const stationDataState = atom({
+  key: "stationDataState",
+  default: "Choose a station to view details",
+});

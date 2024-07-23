@@ -46,7 +46,7 @@ const SignUp = () => {
       redirect: "follow",
     };
 
-    fetch("http://192.168.1.21:5000/charging_app/signup/", requestOptions)
+    fetch("https://evcharging.live:8000/charging_app/signup/", requestOptions)
       .then((response) => response.json())
       .then((result) => {
         console.log(result);

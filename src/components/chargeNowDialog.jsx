@@ -7,12 +7,14 @@ import {
   navStates,
   chargeNowRadiusState,
   
+  
 } from "../recoil/recoilState.js";
 import { useRecoilState } from "recoil";
 import Search from "@/components/searchbox_start";
 import { Button } from "@/components/ui/button";
 import { useEffect, useState } from "react";
 import { Slider } from "@/components/ui/slider";
+import { Cross2Icon } from "@radix-ui/react-icons";
 
 
 export default function ChargeNowDialog() {
@@ -21,6 +23,7 @@ export default function ChargeNowDialog() {
   const [chargeNowRadius,setChargeNowRadius]=useRecoilState(chargeNowRadiusState);
   const [chargeNow, setChargeNow] = useRecoilState(chargeNowState);
   const [navState, setNavState] = useRecoilState(navStates);
+  
   function updateStartLocation(newLat, newLng) {
     setStartLocation({ lat: newLat, lng: newLng });
   }
@@ -48,16 +51,17 @@ export default function ChargeNowDialog() {
       id="chargeNowDialog"
       open={chargeNow}
       style={{ backgroundColor: "black" }}
-      className="rounded-lg w-80 h-96 p-4 absolute top-0 left-0 ml-4 mt-24 text-white"
+      className="rounded-lg w-80 h-auto p-4 absolute top-0 left-0 ml-4 mt-24 text-white"
     >
       <button
         onClick={() => setChargeNow(false)}
-        className="absolute top-2 right-2 bg-transparent text-white p-2 hover:bg-gray-700 rounded-full"
+        className="absolute top-2 right-2 bg-transparent text-white p-2 hover:bg-gray-800 rounded-full"
       >
-        x
+        <Cross2Icon/>
       </button>
       <div className="p-2">
-        <h1 className="mb-2 ml-2 font-extrabold">Charge Now</h1>
+        <h1 className="mb-2 ml-4 font-extrabold">Charge Now</h1>
+        <p className="mb-2 mt-2 ml-4">Find Your Nearest Charger</p>
 
         <Search />
         <div className="flex flex-col items-center my-8">
